@@ -18,6 +18,7 @@ repositories {
     ivy {
         url = uri("https://github.com/odtheking/Odin/releases/download")
         patternLayout {
+            artifact("[revision]/[artifact]-[revision](-[classifier]).[ext]")
             artifact("[revision]/[artifact]-[revision].[ext]")
         }
         metadataSources {
@@ -33,6 +34,7 @@ dependencies {
     implementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_api_version")}")
 
     runtimeOnly("me.djtheredstoner:DevAuth-fabric:${property("devauth_version")}")
+    //replace with implementation during testing
     compileOnly("com.odtheking:Odin:${property("odin_version")}@jar")
 
     property("commodore_version").let {
@@ -62,9 +64,7 @@ loom {
             arrayOf(
                 "-Dmixin.debug.export=true",
                 "-Ddevauth.enabled=true",
-                "-Ddevauth.account=main",
-                "-XX:+IgnoreUnrecognizedVMOptions",
-                "-XX:+AllowEnhancedClassRedefinition",
+                "-Ddevauth.account=main"
             )
         )
     }
